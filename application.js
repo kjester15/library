@@ -8,11 +8,12 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(book) {
+  
   myLibrary.push(book);
 }
 
 function displayLibrary(array) {
-  array.forEach((element) => {
+  array.forEach((element, i) => {
     const newDiv = document.createElement("div");
     document.getElementById("book-shelf").appendChild(newDiv);
     const newTitle = document.createElement("h3");
@@ -25,6 +26,7 @@ function displayLibrary(array) {
     newRead.innerHTML = `Read? ${element.read}`;
     newDiv.append(newTitle, newAuthor, newPages, newRead);
     newDiv.classList.add("book-card");
+    newDiv.setAttribute("id", `book-${i}`);
   });
 }
 
@@ -36,3 +38,4 @@ const book3 = new Book("title 3", "author 3", 395, true);
 addBookToLibrary(book3);
 displayLibrary(myLibrary);
 document.getElementById('add').addEventListener("click", addBookToLibrary);
+
