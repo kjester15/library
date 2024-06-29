@@ -22,8 +22,13 @@ function displayLibrary(array) {
     newAuthor.innerHTML = `by ${element.author}`;
     const newPages = document.createElement("h5");
     newPages.innerHTML = `${element.pages} pages`;
-    const newRead = document.createElement("div");
-    newRead.innerHTML = `Read? ${element.read}`;
+    const newRead = document.createElement("button");
+    newRead.setAttribute("id", "read")
+    if (element.read === true) {
+      newRead.innerHTML = "Read";
+    } else {
+      newRead.innerHTML = "Not Read";
+    }
     newDiv.append(newTitle, newAuthor, newPages, newRead);
     newDiv.classList.add("book-card");
     newDiv.setAttribute("id", `book-${i}`);
@@ -38,4 +43,5 @@ const book3 = new Book("title 3", "author 3", 395, true);
 addBookToLibrary(book3);
 displayLibrary(myLibrary);
 document.getElementById('add').addEventListener("click", addBookToLibrary);
+
 
