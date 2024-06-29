@@ -18,11 +18,11 @@ function displayLibrary(array) {
     const newTitle = document.createElement("h3");
     newTitle.innerHTML = element.title;
     const newAuthor = document.createElement("h4");
-    newAuthor.innerHTML = element.author;
+    newAuthor.innerHTML = `by ${element.author}`;
     const newPages = document.createElement("h5");
-    newPages.innerHTML = element.pages;
+    newPages.innerHTML = `${element.pages} pages`;
     const newRead = document.createElement("div");
-    newRead.innerHTML = element.read;
+    newRead.innerHTML = `Read? ${element.read}`;
     newDiv.append(newTitle, newAuthor, newPages, newRead);
     newDiv.classList.add("book-card");
   });

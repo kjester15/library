@@ -6,12 +6,29 @@ body {
 }
 
 .book-card {
-  background-color: rgb(255, 191, 131);
+  background-color: rgb(255, 209, 165);
   border-radius: 10px;
   text-align: center;
   width: 150px;
+  margin: 20px;
+  padding: 20px;
 }
 
 .book-shelf {
   display: flex;
+  flex-wrap: wrap;
+}
+
+button {
+  border: none;
+  width: 100px;
+  height: 40px;
+  font-size: 18px;
+  border-radius: 10px;
+  background-color: rgb(186, 255, 186);
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: rgb(130, 249, 130);
 }
