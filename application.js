@@ -26,8 +26,10 @@ function displayLibrary(array) {
     newRead.setAttribute("id", "read")
     if (element.read === true) {
       newRead.innerHTML = "Read";
+      newRead.classList.add("read");
     } else {
       newRead.innerHTML = "Not Read";
+      newRead.classList.add("not-read");
     }
     newDiv.append(newTitle, newAuthor, newPages, newRead);
     newDiv.classList.add("book-card");
@@ -35,7 +37,7 @@ function displayLibrary(array) {
   });
 }
 
-const book1 = new Book("title 1", "author 1", 395, true);
+const book1 = new Book("title 1", "author 1", 395, false);
 addBookToLibrary(book1);
 const book2 = new Book("title 2", "author 2", 395, true);
 addBookToLibrary(book2);

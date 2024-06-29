@@ -6,12 +6,14 @@ body {
 }
 
 .book-card {
-  background-color: rgb(255, 209, 165);
+  background-color: rgb(255, 225, 197);
   border-radius: 10px;
   text-align: center;
   width: 150px;
   margin: 20px;
   padding: 20px;
+  box-shadow: 1px 1px 5px 0px;
+
 }
 
 .book-shelf {
@@ -27,22 +29,35 @@ body {
   border-radius: 10px;
   background-color: rgb(186, 242, 255);
   transition: 0.2s;
-}
-
-#read {
-  border: none;
-  width: 80px;
-  height: 30px;
-  font-size: 16px;
-  border-radius: 10px;
-  background-color: rgb(186, 255, 186);
-  transition: 0.2s;
+  box-shadow: 1px 1px 5px 0px;
 }
 
 #add:hover {
   background-color: rgb(130, 185, 249);
 }
 
-#read:hover {
+#read {
+  border: none;
+  width: 100px;
+  height: 30px;
+  font-size: 16px;
+  border-radius: 10px;
+  transition: 0.2s;
+  box-shadow: 1px 1px 5px 0px;
+}
+
+.read {
+  background-color: rgb(186, 255, 186);
+}
+
+.read:hover {
   background-color: rgb(130, 249, 140);
+}
+
+.not-read {
+  background-color: rgb(255, 186, 186);
+}
+
+.not-read:hover {
+  background-color: rgb(249, 130, 130);
 }
