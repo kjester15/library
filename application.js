@@ -7,9 +7,27 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+function openDialog() {
+  const dialog = document.getElementById("dialog")
+  dialog.showModal()
+}
+
+function closeDialog() {
+  const closeDialog = document.getElementById("close")
+  closeDialog.close()
+}
+
 function addBookToLibrary(book) {
-  
   myLibrary.push(book);
+}
+
+function swapReadButton() {
+  console.log(this);
+  // if (this.innerHTML === "Read") {
+  //   this.innerHTML = "Not Read";
+  //   this.classList.add("not-read");
+  //   this.classList.remove("read");
+  // };
 }
 
 function displayLibrary(array) {
@@ -44,6 +62,9 @@ addBookToLibrary(book2);
 const book3 = new Book("title 3", "author 3", 395, true);
 addBookToLibrary(book3);
 displayLibrary(myLibrary);
-document.getElementById('add').addEventListener("click", addBookToLibrary);
+document.getElementById('add').addEventListener("click", openDialog);
+document.getElementById('close').addEventListener("click", closeDialog);
+console.log(document.getElementById('read'))
+document.getElementById('read').addEventListener("click", swapReadButton);
 
 

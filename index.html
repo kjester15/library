@@ -11,6 +11,23 @@
   <p>Add books you've read or want to read! (Or to test the functionality of this app)</p>
   <p>This app was created by Kyle Jester. Refer to the <a href="https://github.com/kjester15/library">Github Repository</a> for details.</p>
   <button id="add">Add Book</button>
+  <dialog id="dialog">
+    <form method="dialog">
+      <button id="close">X</button><br><br>
+      <label for="title">Title:</label><br>
+      <input type="text" id="title" name="title"><br><br>
+      <label for="author">Author:</label><br>
+      <input type="text" id="author" name="author"><br><br>
+      <label for="pages"># of Pages:</label><br>
+      <input type="number" id="pages" name="pages"><br><br>
+      <label for="read">Read?:</label><br>
+      <select id="read">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select><br><br>
+      <button type="submit">Add</button>
+    </form>
+  </dialog>
   <div class="book-shelf" id="book-shelf"></div>
   <script src="application.js"></script>
 </body>
