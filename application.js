@@ -57,7 +57,6 @@ function removeBookFromLibrary(book) {
   displayLibrary(myLibrary);
 }
 
-// TODO: instead of swapping the button text, swap the value of the book object
 function swapReadButton(targetButton) {
   if (targetButton.innerHTML === "Read") {
     targetButton.innerHTML = "Not Read";
@@ -80,7 +79,6 @@ function updateReadStatus(book) {
         element.read = "Yes";
       };
     };
-    console.log(element);
   });
 }
 
