@@ -26,14 +26,15 @@ function addBookToLibrary(book) {
   closeDialog();
 }
 
-// TODO: finish this function
 function removeBookFromLibrary(book) {
   const title = book.firstChild.innerHTML;
-  const index = myLibrary.indexOf(title)
-  console.log(index)
-  if (index > -1) {
-    myLibrary.splice(index, 1);
-  }
+  var index = -1;
+  myLibrary.forEach((element) => {
+    if (element.title != title) {
+      index += 1;
+    }
+  });
+  myLibrary.splice(index, 1);
   console.log(myLibrary)
   clearLibrary();
   displayLibrary(myLibrary);
@@ -50,6 +51,15 @@ function swapReadButton(targetButton) {
     targetButton.classList.add("read");
     targetButton.classList.remove("not-read");
   };
+}
+
+function updateReadStatus(targetButton) {
+  // if (book.read === "Yes") {
+  //   book.read = "No";
+  // } else {
+  //   book.read === "Yes";
+  // };
+  console.log(targetButton);
 }
 
 function clearLibrary() {
@@ -78,6 +88,7 @@ function displayLibrary(array) {
     // add event listener to button
     newRead.addEventListener("click", (event) => {
       swapReadButton(event.target);
+      updateReadStatus(event.target);
     });
     const newDelete = document.createElement("button");
     newDelete.innerHTML = "Remove";
