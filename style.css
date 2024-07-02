@@ -114,3 +114,20 @@ input {
   border: 1px solid rgb(171, 171, 171);
   border-radius: 5px;
 }
+
+#delete {
+  margin-top: 15px;
+  border: none;
+  background-color: rgb(255, 186, 186);
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  transition: 0.2s;
+  box-shadow: 1px 1px 5px 0px;
+}
+
+#delete:hover {
+  background-color: rgb(249, 130, 130);
+}

@@ -25,6 +25,7 @@ function addBookToLibrary(book) {
   closeDialog();
 }
 
+// TODO: instead of swapping the button text, swap the value of the book object
 function swapReadButton(targetButton) {
   if (targetButton.innerHTML === "Read") {
     targetButton.innerHTML = "Not Read";
@@ -60,13 +61,15 @@ function displayLibrary(array) {
       newRead.innerHTML = "Not Read";
       newRead.classList.add("not-read");
     }
+    const newDelete = document.createElement("button");
+    newDelete.innerHTML = "Remove";
+    newDelete.setAttribute("id", "delete")
     // add event listener to button
     newRead.addEventListener("click", (event) => {
-      console.log(event.target);
       swapReadButton(event.target);
     });
     // add all the children to the parent div
-    newDiv.append(newTitle, newAuthor, newPages, newRead);
+    newDiv.append(newTitle, newAuthor, newPages, newRead, newDelete);
     newDiv.classList.add("book-card");
     newDiv.setAttribute("id", `book-${i}`);
   });
