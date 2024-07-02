@@ -36,7 +36,7 @@ body {
   background-color: rgb(130, 185, 249);
 }
 
-#read {
+#read-book {
   border: none;
   width: 100px;
   height: 30px;
@@ -105,4 +105,12 @@ input {
 
 #close:hover {
   background-color: rgb(187, 187, 187);
+}
+
+#read {
+  width: 70px;
+  height: 30px;
+  font-size: 18px;
+  border: 1px solid rgb(171, 171, 171);
+  border-radius: 5px;
 }

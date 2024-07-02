@@ -50,8 +50,9 @@ function displayLibrary(array) {
     const newPages = document.createElement("h5");
     newPages.innerHTML = `${element.pages} pages`;
     const newRead = document.createElement("button");
-    newRead.setAttribute("id", "read")
-    if (element.read === true) {
+    newRead.setAttribute("id", "read-book")
+    console.log(`element read = ${element.read}`)
+    if (element.read === "Yes") {
       newRead.innerHTML = "Read";
       newRead.classList.add("read");
     } else {
