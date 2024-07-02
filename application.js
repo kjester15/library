@@ -18,6 +18,8 @@ function closeDialog() {
 }
 
 function addBookToLibrary(book) {
+  const newBook = new Book(book.title, book.author, book.pages, book.read)
+  console.log(newBook)
   myLibrary.push(book);
 }
 
@@ -64,7 +66,17 @@ addBookToLibrary(book3);
 displayLibrary(myLibrary);
 document.getElementById('add').addEventListener("click", openDialog);
 document.getElementById('close').addEventListener("click", closeDialog);
-console.log(document.getElementById('read'))
-document.getElementById('read').addEventListener("click", swapReadButton);
+// document.getElementById('read').addEventListener("click", swapReadButton);
+const bookForm = document.querySelector("form");
+bookForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  new FormData(bookForm);
+});
+bookForm.addEventListener("formdata", (event) => {
+  const book = {}
+  const data = event.formData;
+  data.forEach((value, key) => (book[`${key}`] = value))
+  addBookToLibrary(book)
+});
 
 

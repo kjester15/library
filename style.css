@@ -79,7 +79,7 @@ input {
   border: 1px solid rgb(167, 167, 167);
 }
 
-.submit {
+#submit {
   font-size: 18px;
   width: 70px;
   height: 30px;
@@ -89,7 +89,7 @@ input {
   transition: 0.2s;
 }
 
-.submit:hover {
+#submit:hover {
   background-color: rgb(130, 185, 249);
 }
 

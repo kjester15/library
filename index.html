@@ -12,7 +12,7 @@
   <p>This app was created by Kyle Jester. Refer to the <a href="https://github.com/kjester15/library">Github Repository</a> for details.</p>
   <button id="add">Add Book</button>
   <dialog id="dialog">
-    <form method="dialog">
+    <form id="form" method="dialog">
       <button id="close">X</button><br><br>
       <label for="title">Title:</label><br>
       <input type="text" id="title" name="title"><br><br>
@@ -21,11 +21,11 @@
       <label for="pages"># of Pages:</label><br>
       <input type="number" id="pages" name="pages"><br><br>
       <label for="read">Read?:</label><br>
-      <select id="read">
+      <select id="read" name="read">
         <option value="Yes">Yes</option>
         <option value="No">No</option>
       </select><br><br>
-      <button class="submit" type="submit">Add</button>
+      <button id="submit" type="submit">Add</button>
     </form>
   </dialog>
   <div class="book-shelf" id="book-shelf"></div>
