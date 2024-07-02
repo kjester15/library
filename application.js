@@ -1,6 +1,7 @@
 const myLibrary = []
+var bookCounter = -1;
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, id) {
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -23,6 +24,19 @@ function addBookToLibrary(book) {
   clearLibrary();
   displayLibrary(myLibrary);
   closeDialog();
+}
+
+// TODO: finish this function
+function removeBookFromLibrary(book) {
+  const title = book.firstChild.innerHTML;
+  const index = myLibrary.indexOf(title)
+  console.log(index)
+  if (index > -1) {
+    myLibrary.splice(index, 1);
+  }
+  console.log(myLibrary)
+  clearLibrary();
+  displayLibrary(myLibrary);
 }
 
 // TODO: instead of swapping the button text, swap the value of the book object
@@ -61,12 +75,16 @@ function displayLibrary(array) {
       newRead.innerHTML = "Not Read";
       newRead.classList.add("not-read");
     }
+    // add event listener to button
+    newRead.addEventListener("click", (event) => {
+      swapReadButton(event.target);
+    });
     const newDelete = document.createElement("button");
     newDelete.innerHTML = "Remove";
     newDelete.setAttribute("id", "delete")
     // add event listener to button
-    newRead.addEventListener("click", (event) => {
-      swapReadButton(event.target);
+    newDelete.addEventListener("click", (event) => {
+      removeBookFromLibrary(event.target.parentElement);
     });
     // add all the children to the parent div
     newDiv.append(newTitle, newAuthor, newPages, newRead, newDelete);
