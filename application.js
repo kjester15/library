@@ -10,7 +10,6 @@ function Book(title, author, pages, read) {
 function openDialog() {
   const dialog = document.getElementById("dialog")
   dialog.showModal()
-  
 }
 
 function closeDialog() {
@@ -26,13 +25,16 @@ function addBookToLibrary(book) {
   closeDialog();
 }
 
-function swapReadButton() {
-  console.log(this);
-  // if (this.innerHTML === "Read") {
-  //   this.innerHTML = "Not Read";
-  //   this.classList.add("not-read");
-  //   this.classList.remove("read");
-  // };
+function swapReadButton(targetButton) {
+  if (targetButton.innerHTML === "Read") {
+    targetButton.innerHTML = "Not Read";
+    targetButton.classList.add("not-read");
+    targetButton.classList.remove("read");
+  } else {
+    targetButton.innerHTML = "Read";
+    targetButton.classList.add("read");
+    targetButton.classList.remove("not-read");
+  };
 }
 
 function clearLibrary() {
@@ -51,7 +53,6 @@ function displayLibrary(array) {
     newPages.innerHTML = `${element.pages} pages`;
     const newRead = document.createElement("button");
     newRead.setAttribute("id", "read-book")
-    console.log(`element read = ${element.read}`)
     if (element.read === "Yes") {
       newRead.innerHTML = "Read";
       newRead.classList.add("read");
@@ -59,6 +60,12 @@ function displayLibrary(array) {
       newRead.innerHTML = "Not Read";
       newRead.classList.add("not-read");
     }
+    // add event listener to button
+    newRead.addEventListener("click", (event) => {
+      console.log(event.target);
+      swapReadButton(event.target);
+    });
+    // add all the children to the parent div
     newDiv.append(newTitle, newAuthor, newPages, newRead);
     newDiv.classList.add("book-card");
     newDiv.setAttribute("id", `book-${i}`);
@@ -68,7 +75,6 @@ function displayLibrary(array) {
 displayLibrary(myLibrary);
 document.getElementById('add').addEventListener("click", openDialog);
 document.getElementById('close').addEventListener("click", closeDialog);
-// document.getElementById('read').addEventListener("click", swapReadButton);
 
 const bookForm = document.querySelector("form");
 bookForm.addEventListener("submit", (event) => {
