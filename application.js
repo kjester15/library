@@ -21,7 +21,6 @@ function closeDialog() {
 function verifyBookName() {
   let valid = true;
   let name = document.forms["form"]["title"].value;
-  console.log(name)
   myLibrary.forEach((book) => {
     if (name == book.title) {
       alert("That book is already in your library!");
@@ -54,7 +53,6 @@ function removeBookFromLibrary(book) {
     };
   });
   myLibrary.splice(index, 1);
-  console.log(myLibrary)
   clearLibrary();
   displayLibrary(myLibrary);
 }
@@ -72,13 +70,18 @@ function swapReadButton(targetButton) {
   };
 }
 
-function updateReadStatus(targetButton) {
-  // if (book.read === "Yes") {
-  //   book.read = "No";
-  // } else {
-  //   book.read === "Yes";
-  // };
-  console.log(targetButton);
+function updateReadStatus(book) {
+  const title = book.firstChild.innerHTML;
+  myLibrary.forEach((element) => {
+    if (element.title == title) {
+      if (element.read == "Yes") {
+        element.read = "No";
+      } else {
+        element.read = "Yes";
+      };
+    };
+    console.log(element);
+  });
 }
 
 function clearLibrary() {
@@ -107,7 +110,7 @@ function displayLibrary(array) {
     // add event listener to button
     newRead.addEventListener("click", (event) => {
       swapReadButton(event.target);
-      updateReadStatus(event.target);
+      updateReadStatus(event.target.parentElement);
     });
     const newDelete = document.createElement("button");
     newDelete.innerHTML = "Remove";
