@@ -10,17 +10,20 @@ function Book(title, author, pages, read) {
 function openDialog() {
   const dialog = document.getElementById("dialog")
   dialog.showModal()
+  
 }
 
 function closeDialog() {
-  const closeDialog = document.getElementById("close")
+  const closeDialog = document.getElementById("dialog")
   closeDialog.close()
 }
 
 function addBookToLibrary(book) {
   const newBook = new Book(book.title, book.author, book.pages, book.read)
-  console.log(newBook)
-  myLibrary.push(book);
+  myLibrary.push(newBook);
+  clearLibrary();
+  displayLibrary(myLibrary);
+  closeDialog();
 }
 
 function swapReadButton() {
@@ -30,6 +33,10 @@ function swapReadButton() {
   //   this.classList.add("not-read");
   //   this.classList.remove("read");
   // };
+}
+
+function clearLibrary() {
+  document.getElementById("book-shelf").innerHTML = "";
 }
 
 function displayLibrary(array) {
@@ -57,26 +64,23 @@ function displayLibrary(array) {
   });
 }
 
-const book1 = new Book("title 1", "author 1", 395, false);
-addBookToLibrary(book1);
-const book2 = new Book("title 2", "author 2", 395, true);
-addBookToLibrary(book2);
-const book3 = new Book("title 3", "author 3", 395, true);
-addBookToLibrary(book3);
 displayLibrary(myLibrary);
 document.getElementById('add').addEventListener("click", openDialog);
 document.getElementById('close').addEventListener("click", closeDialog);
 // document.getElementById('read').addEventListener("click", swapReadButton);
+
 const bookForm = document.querySelector("form");
 bookForm.addEventListener("submit", (event) => {
   event.preventDefault();
   new FormData(bookForm);
 });
+
 bookForm.addEventListener("formdata", (event) => {
   const book = {}
   const data = event.formData;
   data.forEach((value, key) => (book[`${key}`] = value))
   addBookToLibrary(book)
+  bookForm.reset();
 });
 
 
