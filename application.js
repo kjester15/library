@@ -18,6 +18,23 @@ function closeDialog() {
   closeDialog.close()
 }
 
+function verifyBookName() {
+  let valid = true;
+  let name = document.forms["form"]["title"].value;
+  console.log(name)
+  myLibrary.forEach((book) => {
+    if (name == book.title) {
+      alert("That book is already in your library!");
+      valid = false;
+    }
+  });
+  if (valid === false) {
+    return false;
+  } else {
+    return true;
+  };
+}
+
 function addBookToLibrary(book) {
   const newBook = new Book(book.title, book.author, book.pages, book.read)
   myLibrary.push(newBook);
@@ -32,7 +49,9 @@ function removeBookFromLibrary(book) {
   myLibrary.forEach((element) => {
     if (element.title != title) {
       index += 1;
-    }
+    } else {
+      return;
+    };
   });
   myLibrary.splice(index, 1);
   console.log(myLibrary)
@@ -118,7 +137,9 @@ bookForm.addEventListener("formdata", (event) => {
   const book = {}
   const data = event.formData;
   data.forEach((value, key) => (book[`${key}`] = value))
-  addBookToLibrary(book)
+  if (verifyBookName()) {
+    addBookToLibrary(book)
+  };
   bookForm.reset();
 });
 
