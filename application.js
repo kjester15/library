@@ -88,8 +88,8 @@ function clearLibrary() {
 
 function displayLibrary(array) {
   array.forEach((element, i) => {
-    const newRow = document.createElement("div");
-    document.getElementById("board").appendChild(newDiv);
+    const newDiv = document.createElement("div");
+    document.getElementById("book-shelf").appendChild(newDiv);
     const newTitle = document.createElement("h3");
     newTitle.innerHTML = element.title;
     const newAuthor = document.createElement("h4");
