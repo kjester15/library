@@ -1,7 +1,7 @@
 const myLibrary = []
 var bookCounter = -1;
 
-function Book(title, author, pages, read, id) {
+function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
