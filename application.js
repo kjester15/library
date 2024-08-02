@@ -15,11 +15,23 @@ class Library {
     this.myLibrary = [];
     this.bookCounter = -1;
   }
+}
 
-  verifyBookName() {
+class GamePlay {
+  openDialog() {
+    const dialog = document.getElementById("dialog")
+    dialog.showModal()
+  }
+
+  closeDialog() {
+    const closeDialog = document.getElementById("dialog")
+    closeDialog.close()
+  }
+
+  verifyBookName(library) {
     let valid = true;
     let name = document.forms["form"]["title"].value;
-    myLibrary.forEach((book) => {
+    library.myLibrary.forEach((book) => {
       if (name == book.title) {
         alert("That book is already in your library!");
         valid = false;
@@ -32,11 +44,11 @@ class Library {
     };
   }
 
-  addBookToLibrary(book) {
+  addBookToLibrary(library, book) {
     const newBook = new Book(book.title, book.author, book.pages, book.read)
-    myLibrary.push(newBook);
+    library.myLibrary.push(newBook);
     clearLibrary();
-    displayLibrary(myLibrary);
+    displayLibrary(library.myLibrary);
     closeDialog();
   }
 
@@ -54,22 +66,89 @@ class Library {
     clearLibrary();
     displayLibrary(myLibrary);
   }
+
+  swapReadButton(targetButton) {
+    if (targetButton.innerHTML === "Read") {
+      targetButton.innerHTML = "Not Read";
+      targetButton.classList.add("not-read");
+      targetButton.classList.remove("read");
+    } else {
+      targetButton.innerHTML = "Read";
+      targetButton.classList.add("read");
+      targetButton.classList.remove("not-read");
+    };
+  }
+
+  updateReadStatus(book) {
+    const title = book.firstChild.innerHTML;
+    myLibrary.forEach((element) => {
+      if (element.title == title) {
+        if (element.read == "Yes") {
+          element.read = "No";
+        } else {
+          element.read = "Yes";
+        };
+      };
+    });
+  }
+
+  clearLibrary() {
+    document.getElementById("book-shelf").innerHTML = "";
+  }
+
+  displayLibrary(array) {
+    array.forEach((element, i) => {
+      const newDiv = document.createElement("div");
+      document.getElementById("book-shelf").appendChild(newDiv);
+      const newTitle = document.createElement("h3");
+      newTitle.innerHTML = element.title;
+      const newAuthor = document.createElement("h4");
+      newAuthor.innerHTML = `by ${element.author}`;
+      const newPages = document.createElement("h5");
+      newPages.innerHTML = `${element.pages} pages`;
+      const newRead = document.createElement("button");
+      newRead.setAttribute("id", "read-book")
+      if (element.read === "Yes") {
+        newRead.innerHTML = "Read";
+        newRead.classList.add("read");
+      } else {
+        newRead.innerHTML = "Not Read";
+        newRead.classList.add("not-read");
+      }
+      // add event listener to button
+      newRead.addEventListener("click", (event) => {
+        swapReadButton(event.target);
+        updateReadStatus(event.target.parentElement);
+      });
+      const newDelete = document.createElement("button");
+      newDelete.innerHTML = "Remove";
+      newDelete.setAttribute("id", "delete")
+      // add event listener to button
+      newDelete.addEventListener("click", (event) => {
+        removeBookFromLibrary(event.target.parentElement);
+      });
+      // add all the children to the parent div
+      newDiv.append(newTitle, newAuthor, newPages, newRead, newDelete);
+      newDiv.classList.add("book-card");
+      newDiv.setAttribute("id", `book-${i}`);
+    });
+  }
 }
 
-function openDialog() {
-  const dialog = document.getElementById("dialog")
-  dialog.showModal()
-}
+// function openDialog() {
+//   const dialog = document.getElementById("dialog")
+//   dialog.showModal()
+// }
 
-function closeDialog() {
-  const closeDialog = document.getElementById("dialog")
-  closeDialog.close()
-}
+// function closeDialog() {
+//   const closeDialog = document.getElementById("dialog")
+//   closeDialog.close()
+// }
 
-// function verifyBookName() {
+// function verifyBookName(library) {
 //   let valid = true;
 //   let name = document.forms["form"]["title"].value;
-//   myLibrary.forEach((book) => {
+//   library.myLibrary.forEach((book) => {
 //     if (name == book.title) {
 //       alert("That book is already in your library!");
 //       valid = false;
@@ -82,11 +161,11 @@ function closeDialog() {
 //   };
 // }
 
-// function addBookToLibrary(book) {
+// function addBookToLibrary(library, book) {
 //   const newBook = new Book(book.title, book.author, book.pages, book.read)
-//   myLibrary.push(newBook);
+//   library.myLibrary.push(newBook);
 //   clearLibrary();
-//   displayLibrary(myLibrary);
+//   displayLibrary(library.myLibrary);
 //   closeDialog();
 // }
 
@@ -105,74 +184,76 @@ function closeDialog() {
 //   displayLibrary(myLibrary);
 // }
 
-function swapReadButton(targetButton) {
-  if (targetButton.innerHTML === "Read") {
-    targetButton.innerHTML = "Not Read";
-    targetButton.classList.add("not-read");
-    targetButton.classList.remove("read");
-  } else {
-    targetButton.innerHTML = "Read";
-    targetButton.classList.add("read");
-    targetButton.classList.remove("not-read");
-  };
-}
+// function swapReadButton(targetButton) {
+//   if (targetButton.innerHTML === "Read") {
+//     targetButton.innerHTML = "Not Read";
+//     targetButton.classList.add("not-read");
+//     targetButton.classList.remove("read");
+//   } else {
+//     targetButton.innerHTML = "Read";
+//     targetButton.classList.add("read");
+//     targetButton.classList.remove("not-read");
+//   };
+// }
 
-function updateReadStatus(book) {
-  const title = book.firstChild.innerHTML;
-  myLibrary.forEach((element) => {
-    if (element.title == title) {
-      if (element.read == "Yes") {
-        element.read = "No";
-      } else {
-        element.read = "Yes";
-      };
-    };
-  });
-}
+// function updateReadStatus(book) {
+//   const title = book.firstChild.innerHTML;
+//   myLibrary.forEach((element) => {
+//     if (element.title == title) {
+//       if (element.read == "Yes") {
+//         element.read = "No";
+//       } else {
+//         element.read = "Yes";
+//       };
+//     };
+//   });
+// }
 
-function clearLibrary() {
-  document.getElementById("book-shelf").innerHTML = "";
-}
+// function clearLibrary() {
+//   document.getElementById("book-shelf").innerHTML = "";
+// }
 
-function displayLibrary(array) {
-  array.forEach((element, i) => {
-    const newDiv = document.createElement("div");
-    document.getElementById("book-shelf").appendChild(newDiv);
-    const newTitle = document.createElement("h3");
-    newTitle.innerHTML = element.title;
-    const newAuthor = document.createElement("h4");
-    newAuthor.innerHTML = `by ${element.author}`;
-    const newPages = document.createElement("h5");
-    newPages.innerHTML = `${element.pages} pages`;
-    const newRead = document.createElement("button");
-    newRead.setAttribute("id", "read-book")
-    if (element.read === "Yes") {
-      newRead.innerHTML = "Read";
-      newRead.classList.add("read");
-    } else {
-      newRead.innerHTML = "Not Read";
-      newRead.classList.add("not-read");
-    }
-    // add event listener to button
-    newRead.addEventListener("click", (event) => {
-      swapReadButton(event.target);
-      updateReadStatus(event.target.parentElement);
-    });
-    const newDelete = document.createElement("button");
-    newDelete.innerHTML = "Remove";
-    newDelete.setAttribute("id", "delete")
-    // add event listener to button
-    newDelete.addEventListener("click", (event) => {
-      removeBookFromLibrary(event.target.parentElement);
-    });
-    // add all the children to the parent div
-    newDiv.append(newTitle, newAuthor, newPages, newRead, newDelete);
-    newDiv.classList.add("book-card");
-    newDiv.setAttribute("id", `book-${i}`);
-  });
-}
+// function displayLibrary(array) {
+//   array.forEach((element, i) => {
+//     const newDiv = document.createElement("div");
+//     document.getElementById("book-shelf").appendChild(newDiv);
+//     const newTitle = document.createElement("h3");
+//     newTitle.innerHTML = element.title;
+//     const newAuthor = document.createElement("h4");
+//     newAuthor.innerHTML = `by ${element.author}`;
+//     const newPages = document.createElement("h5");
+//     newPages.innerHTML = `${element.pages} pages`;
+//     const newRead = document.createElement("button");
+//     newRead.setAttribute("id", "read-book")
+//     if (element.read === "Yes") {
+//       newRead.innerHTML = "Read";
+//       newRead.classList.add("read");
+//     } else {
+//       newRead.innerHTML = "Not Read";
+//       newRead.classList.add("not-read");
+//     }
+//     // add event listener to button
+//     newRead.addEventListener("click", (event) => {
+//       swapReadButton(event.target);
+//       updateReadStatus(event.target.parentElement);
+//     });
+//     const newDelete = document.createElement("button");
+//     newDelete.innerHTML = "Remove";
+//     newDelete.setAttribute("id", "delete")
+//     // add event listener to button
+//     newDelete.addEventListener("click", (event) => {
+//       removeBookFromLibrary(event.target.parentElement);
+//     });
+//     // add all the children to the parent div
+//     newDiv.append(newTitle, newAuthor, newPages, newRead, newDelete);
+//     newDiv.classList.add("book-card");
+//     newDiv.setAttribute("id", `book-${i}`);
+//   });
+// }
 
-displayLibrary(myLibrary);
+const library = new Library();
+const game = new GamePlay();
+displayLibrary(library.myLibrary);
 document.getElementById('add').addEventListener("click", openDialog);
 document.getElementById('close').addEventListener("click", closeDialog);
 
@@ -186,7 +267,7 @@ bookForm.addEventListener("formdata", (event) => {
   const book = {}
   const data = event.formData;
   data.forEach((value, key) => (book[`${key}`] = value))
-  if (verifyBookName()) {
+  if (verifyBookName(library)) {
     addBookToLibrary(book)
   };
   bookForm.reset();
