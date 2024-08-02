@@ -12,8 +12,7 @@ class Book {
 
 class Library {
   constructor() {
-    this.myLibrary = [];
-    this.bookCounter = -1;
+    this.shelf = [];
   }
 }
 
@@ -31,7 +30,7 @@ class GamePlay {
   verifyBookName(library) {
     let valid = true;
     let name = document.forms["form"]["title"].value;
-    library.myLibrary.forEach((book) => {
+    library.shelf.forEach((book) => {
       if (name == book.title) {
         alert("That book is already in your library!");
         valid = false;
@@ -46,25 +45,25 @@ class GamePlay {
 
   addBookToLibrary(library, book) {
     const newBook = new Book(book.title, book.author, book.pages, book.read)
-    library.myLibrary.push(newBook);
+    library.shelf.push(newBook);
     clearLibrary();
-    displayLibrary(library.myLibrary);
+    displayLibrary(library.shelf);
     closeDialog();
   }
 
   removeBookFromLibrary(book) {
     const title = book.firstChild.innerHTML;
     var index = -1;
-    myLibrary.forEach((element) => {
+    shelf.forEach((element) => {
       if (element.title != title) {
         index += 1;
       } else {
         return;
       };
     });
-    myLibrary.splice(index, 1);
+    shelf.splice(index, 1);
     clearLibrary();
-    displayLibrary(myLibrary);
+    displayLibrary(shelf);
   }
 
   swapReadButton(targetButton) {
@@ -81,7 +80,7 @@ class GamePlay {
 
   updateReadStatus(book) {
     const title = book.firstChild.innerHTML;
-    myLibrary.forEach((element) => {
+    shelf.forEach((element) => {
       if (element.title == title) {
         if (element.read == "Yes") {
           element.read = "No";
@@ -253,7 +252,7 @@ class GamePlay {
 
 const library = new Library();
 const game = new GamePlay();
-displayLibrary(library.myLibrary);
+displayLibrary(library.shelf);
 document.getElementById('add').addEventListener("click", openDialog);
 document.getElementById('close').addEventListener("click", closeDialog);
 
