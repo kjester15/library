@@ -1,5 +1,5 @@
-const myLibrary = []
-var bookCounter = -1;
+// const myLibrary = []
+// var bookCounter = -1;
 
 class Book {
   constructor(title, author, pages, read) {
@@ -7,6 +7,52 @@ class Book {
     this.author = author;
     this.pages = pages;
     this.read = read;
+  }
+}
+
+class Library {
+  constructor() {
+    this.myLibrary = [];
+    this.bookCounter = -1;
+  }
+
+  verifyBookName() {
+    let valid = true;
+    let name = document.forms["form"]["title"].value;
+    myLibrary.forEach((book) => {
+      if (name == book.title) {
+        alert("That book is already in your library!");
+        valid = false;
+      }
+    });
+    if (valid === false) {
+      return false;
+    } else {
+      return true;
+    };
+  }
+
+  addBookToLibrary(book) {
+    const newBook = new Book(book.title, book.author, book.pages, book.read)
+    myLibrary.push(newBook);
+    clearLibrary();
+    displayLibrary(myLibrary);
+    closeDialog();
+  }
+
+  removeBookFromLibrary(book) {
+    const title = book.firstChild.innerHTML;
+    var index = -1;
+    myLibrary.forEach((element) => {
+      if (element.title != title) {
+        index += 1;
+      } else {
+        return;
+      };
+    });
+    myLibrary.splice(index, 1);
+    clearLibrary();
+    displayLibrary(myLibrary);
   }
 }
 
@@ -20,44 +66,44 @@ function closeDialog() {
   closeDialog.close()
 }
 
-function verifyBookName() {
-  let valid = true;
-  let name = document.forms["form"]["title"].value;
-  myLibrary.forEach((book) => {
-    if (name == book.title) {
-      alert("That book is already in your library!");
-      valid = false;
-    }
-  });
-  if (valid === false) {
-    return false;
-  } else {
-    return true;
-  };
-}
+// function verifyBookName() {
+//   let valid = true;
+//   let name = document.forms["form"]["title"].value;
+//   myLibrary.forEach((book) => {
+//     if (name == book.title) {
+//       alert("That book is already in your library!");
+//       valid = false;
+//     }
+//   });
+//   if (valid === false) {
+//     return false;
+//   } else {
+//     return true;
+//   };
+// }
 
-function addBookToLibrary(book) {
-  const newBook = new Book(book.title, book.author, book.pages, book.read)
-  myLibrary.push(newBook);
-  clearLibrary();
-  displayLibrary(myLibrary);
-  closeDialog();
-}
+// function addBookToLibrary(book) {
+//   const newBook = new Book(book.title, book.author, book.pages, book.read)
+//   myLibrary.push(newBook);
+//   clearLibrary();
+//   displayLibrary(myLibrary);
+//   closeDialog();
+// }
 
-function removeBookFromLibrary(book) {
-  const title = book.firstChild.innerHTML;
-  var index = -1;
-  myLibrary.forEach((element) => {
-    if (element.title != title) {
-      index += 1;
-    } else {
-      return;
-    };
-  });
-  myLibrary.splice(index, 1);
-  clearLibrary();
-  displayLibrary(myLibrary);
-}
+// function removeBookFromLibrary(book) {
+//   const title = book.firstChild.innerHTML;
+//   var index = -1;
+//   myLibrary.forEach((element) => {
+//     if (element.title != title) {
+//       index += 1;
+//     } else {
+//       return;
+//     };
+//   });
+//   myLibrary.splice(index, 1);
+//   clearLibrary();
+//   displayLibrary(myLibrary);
+// }
 
 function swapReadButton(targetButton) {
   if (targetButton.innerHTML === "Read") {
